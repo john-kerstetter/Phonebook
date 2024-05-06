@@ -1,19 +1,19 @@
 // Name: John Kerstetter
 // Class: CS 145
 // Assignment: Lab 5 - Phone book
-// File: phonebook/Phonebook.java
+// File: Manager.java
 
 import java.util.Scanner;
 
 enum UserCommand {
-    NONE, QUIT, SHOW_PHONEBOOK, REMOVE_CONTACT
+    NONE, QUIT, SHOW_PHONEBOOK, REMOVE_CONTACT, ADD_CONTACT
 }
 
-public class Menu {
+public class Manager {
     private Scanner input;
 
     // constructor
-    public Menu(Scanner input) {
+    public Manager(Scanner input) {
         this.input = input;
     }
 
@@ -21,7 +21,8 @@ public class Menu {
     public void showCommands() {
         System.out.println("Enter command:");
         System.out.println(" s: Show Phonebook");
-        System.out.println(" r: Remove Entry");
+        System.out.println(" a: Add Contact");
+        System.out.println(" r: Remove Contact");
         System.out.println(" q: Quit");
         System.out.print("--> ");
     }
@@ -39,6 +40,10 @@ public class Menu {
 
             case 'r': {
                 return UserCommand.REMOVE_CONTACT;
+            }
+
+            case 'a': {
+                return UserCommand.ADD_CONTACT;
             }
 
             default: {

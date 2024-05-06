@@ -4,6 +4,7 @@
 // File: Request.java
 
 import java.util.Scanner;
+import phonebook.Contact;
 
 public class Request {
     // ask user for a string input
@@ -28,4 +29,17 @@ public class Request {
             }
         }
     }
+
+    // ask user for a string input
+    public static Contact getContact(Scanner input) {
+        String firstName = getString(input, "Enter first name:");
+        String lastName = getString(input, "Enter last name:");
+        String birthDate = getString(input, "Enter birth date:");
+        String phoneNumber = getString(input, "Enter phone number:");
+        String address = getString(input, "Enter address:");
+        String city = getString(input, "Enter city:");
+        
+        return new Contact(firstName, lastName, birthDate, phoneNumber, address, city);
+    }
+
 }

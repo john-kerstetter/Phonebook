@@ -7,34 +7,39 @@ package phonebook;
 
 public class Phonebook {
     private Contact first;
-    // private Contact last;
 
+    // constructor
     public Phonebook() {
         this.first = null;
-        // this.last = null;
     }
 
+    // constructor with contact
     public Phonebook(Contact e) {
         this.first = e;
-        // this.last = null;
     }
 
+    // print phonebook to user
     public void print() {
         System.out.println();
         System.out.println("| Phonebook Entrys");
 
-        int entryNumber = 1;
         Contact current = this.first;
 
         if (current == null) {
+
             System.out.println("|");
             System.out.println("| No entries");
             System.out.println("|");
+
         } else {
+
+            int entryNumber = 1;
+
             do {
 
                 System.out.println("[===> Entry #" + entryNumber);
-                System.out.println("| Name: " + current.getFirstName() + " " + current.getLastName());
+                System.out
+                        .println("| Name: " + current.getFirstName() + " " + current.getLastName());
                 System.out.println("| Birthday: " + current.getBirthDate());
                 System.out.println("| Phone Number: " + current.getPhoneNumber());
                 System.out.println("| Address: " + current.getAddress() + " " + current.getCity());
@@ -42,20 +47,24 @@ public class Phonebook {
 
                 current = current.getNext();
                 entryNumber += 1;
-            
+
             } while (current != null);
-            
+
             System.out.println("------");
         }
     }
 
     // add an entry to the end of the list
-    public void addEntry(String firstName, String lastName, String birthDate, String phoneNumber,
+    public void addContact(String firstName, String lastName, String birthDate, String phoneNumber,
             String address, String city) {
-        Contact e = new Contact(firstName, lastName, birthDate, phoneNumber, address, city);
+        Contact c = new Contact(firstName, lastName, birthDate, phoneNumber, address, city);
+        this.addContact(c);
+    }
+
+    public void addContact(Contact c) {
 
         if (this.first == null) {
-            this.first = e;
+            this.first = c;
             return;
         }
 
@@ -64,7 +73,7 @@ public class Phonebook {
         while (true) {
             Contact next = current.getNext();
             if (next == null) {
-                current.setNext(e);
+                current.setNext(c);
                 return;
             } else {
                 current = next;
@@ -73,7 +82,7 @@ public class Phonebook {
     }
 
     // get an entry at an index
-    public Contact getEntry(int index) {
+    public Contact getContact(int index) {
 
         Contact current = this.first;
 
@@ -87,21 +96,23 @@ public class Phonebook {
         return current;
     }
 
+    // // get size of phonebook
     // public int getSize() {
-    // Contact current = this.first;
-    // int counter = 0;
+    //     Contact current = this.first;
+    //     int counter = 0;
 
-    // while (true) {
-    // if (current == null || current == this.last) {
-    // return counter;
+    //     while (true) {
+    //         if (current == null || current == this.last) {
+    //             return counter;
+    //         }
+
+    //         current = current.getNext();
+    //         counter += 1;
+    //     }
     // }
 
-    // current = current.getNext();
-    // counter += 1;
-    // }
-    // }
-
-    public Contact remove(int index) {
+    // remove contact at index
+    public Contact removeContact(int index) {
         if (index == 0) {
             Contact t = this.first;
             if (t == null) {
@@ -111,9 +122,9 @@ public class Phonebook {
             return t;
         } else {
 
-            Contact currentPrev = this.getEntry(index - 1);
-            Contact current = this.getEntry(index);
-            Contact currentNext = this.getEntry(index + 1);
+            Contact currentPrev = this.getContact(index - 1);
+            Contact current = this.getContact(index);
+            Contact currentNext = this.getContact(index + 1);
 
             if (currentPrev == null || current == null) {
                 return null;
