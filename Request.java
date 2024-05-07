@@ -41,5 +41,4 @@ public class Request {
         
         return new Contact(firstName, lastName, birthDate, phoneNumber, address, city);
     }
-
 }

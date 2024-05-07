@@ -4,6 +4,8 @@
 // File: Manager.java
 
 import java.util.Scanner;
+import phonebook.Contact;
+import phonebook.Phonebook;
 
 enum UserCommand {
     NONE, QUIT, SHOW_PHONEBOOK, REMOVE_CONTACT, ADD_CONTACT
@@ -11,10 +13,12 @@ enum UserCommand {
 
 public class Manager {
     private Scanner input;
+    private Phonebook phonebook;
 
     // constructor
-    public Manager(Scanner input) {
+    public Manager(Scanner input, Phonebook phonebook) {
         this.input = input;
+        this.phonebook = phonebook;
     }
 
     // show commands to user
@@ -50,5 +54,42 @@ public class Manager {
                 return UserCommand.NONE;
             }
         }
+    }
+
+    public void menu() {
+
+        boolean repeat = true;
+
+        while (repeat) {
+            this.showCommands();
+            switch (this.getCommand()) {
+                case NONE: {
+                    break;
+                }
+
+                case SHOW_PHONEBOOK: {
+                    phonebook.print();
+                    break;
+                }
+
+                case QUIT: {
+                    repeat = false;
+                    break;
+                }
+
+                case REMOVE_CONTACT: {
+                    int index = Request.getInt(input, "Enter item to remove: ");
+                    phonebook.removeContact(index);
+                    break;
+                }
+
+                case ADD_CONTACT: {
+                    Contact c = Request.getContact(input);
+                    phonebook.addContact(c);
+                    break;
+                }
+            }
+        }
+
     }
 }
